@@ -1,30 +1,39 @@
-def find_maximum(a, b, c):
+import streamlit as st
+
+def find_maximum(num1, num2, num3):
     """
     Function to find the maximum of three numbers.
     """
-    return max(a, b, c)
+    return max(num1, num2, num3)
 
 def main():
     """
-    Main function to take inputs from the user and find the maximum.
+    Main function to create the Streamlit app.
     """
-    print("Welcome to the Maximum Number Finder App!")
-    print("Please enter three numbers.")
+    st.title("Maximum Number Finder App")
+    st.write("Enter three numbers below:")
 
-    # Take input from the user
+    # Create blank boxes for user input
+    num1 = st.text_input("Enter the first number:")
+    num2 = st.text_input("Enter the second number:")
+    num3 = st.text_input("Enter the third number:")
+
+    # Convert input to float (if valid)
     try:
-        num1 = float(input("Enter the first number: "))
-        num2 = float(input("Enter the second number: "))
-        num3 = float(input("Enter the third number: "))
-
-        # Find the maximum number
-        maximum = find_maximum(num1, num2, num3)
-
-        # Print the maximum number
-        print("The maximum number is:", maximum)
-
+        num1 = float(num1)
+        num2 = float(num2)
+        num3 = float(num3)
     except ValueError:
-        print("Please enter valid numbers.")
+        st.error("Please enter valid numbers.")
+
+    # Create button to find maximum
+    if st.button("Find Maximum"):
+        # Ensure all inputs are valid
+        if num1 is not None and num2 is not None and num3 is not None:
+            # Find the maximum number
+            maximum = find_maximum(num1, num2, num3)
+            # Display the maximum number
+            st.success(f"The maximum number is: {maximum}")
 
 if __name__ == "__main__":
     main()
